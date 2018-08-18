@@ -1,6 +1,6 @@
 module Bitfinex
 
-    using DataFrames, JSON, Requests
+    using DataFrames, JSON, Requests, HTTP
 
     export platformstatus,
            tickers,
@@ -16,6 +16,6 @@ module Bitfinex
     include("authenticated.jl")
     include("utils.jl")
 
-    const URL = "https://api.bitfinex.com/v2/"
+    const URL = "https://api.bitfinex.com/v1/"
 
 end
