@@ -1,39 +1,86 @@
-function platformstatus()
-    return readstring(get("$URL/platform/status"))
-end
+"""
+TODO: parsing of JSON into DataFrame.
+"""
 
-function tickers(symbol::String)
-    cond, symb = check(symbol)
-    if cond
-        return readstring(get("$URL/tickers?symbols=$symb"))
-    else
-        throw(Error())
-    end
-end
-
+"""
+The ticker is a high level overview of the state of the market.
+It shows you the current best bid and ask, as well as the last
+trade price. It also includes information such as daily volume
+and how much the price has moved over the last day.
+"""
 function ticker(symbol::String)
-    return readstring(get("$URL/ticker/$symbol"))
+    r = HTTP.get("$URL/pubticker/$symbol")
+    s = String(r.body)
+    return JSON.Parser.parse(s)
 end
 
-function trades(symbol::String)
-    return readstring(get("$URL/trades/$symbol/hist"))
+"""
+Various statistics about the requested pair.
+"""
+function stats(symbol::String)
+    r = HTTP.get("$URL/stats/$symbol")
+    s = String(r.body)
+    return JSON.Parser.parse(s)
 end
 
-function books(symbol::String,
-               precision::String)
-    return readstring(get("$URL/book/$symbol/$precision"))
+"""
+Full margin funding book.
+"""
+function fundingbook(currency::String,
+                     limit_bids::Int64 = 50,
+                     limit_asks::Int64 = 50)
+    r = HTTP.get("$URL/lendbook/$currency")
+    s = String(r.body)
+    return JSON.Parser.parse(s)
 end
 
-function stats(key::String,
-               size::String,
-               symbol::String,
-               side::String,
-               section::String)
-    return readstring(get("$URL/stats1/:$key:$size:$symbol:$side/$section"))
+"""
+Full order book.
+"""
+function orderbook(symbol::String,
+                   limit_bids::Int64 = 50,
+                   limit_asks::Int64 = 50,
+                   group::Bool = true)
+    r = HTTP.get("$URL/book/$symbol")
+    s = String(r.body)
+    return JSON.Parser.parse(s)
 end
 
-function candles(timeframe::String,
-                 symbol::String,
-                 section::String)
-    return readstring(get("$URL/candles/trade:$timeframe:$symbol/$section"))
+"""
+List of the most recent trades for the given symbol.
+"""
+function trades(symbol::String,
+               limit_trades = 50)
+    r = HTTP.get("$URL/trades/$symbol")
+    s = String(r.body)
+    return JSON.Parser.parse(s)
+end
+
+"""
+List of the most recent funding data for the given currency: total
+amount provided and Flash Return Rate (in % by 365 days) over time.
+"""
+function lends(currency::String,
+               limit_trades = 50)
+    r = HTTP.get("$URL/lends/$currency")
+    s = String(r.body)
+    return JSON.Parser.parse(s)
+end
+
+"""
+List of symbol names.
+"""
+function symbols()
+    r = HTTP.get("$URL/symbols")
+    s = String(r.body)
+    return DataFrame(Symbol = JSON.Parser.parse(s))
+end
+
+"""
+List of valid symbol IDs and the pair details.
+"""
+function symboldetails()
+    r = HTTP.get("$URL/symbols_details")
+    s = String(r.body)
+    return DataFrame(Symbol = JSON.Parser.parse(s))
 end
