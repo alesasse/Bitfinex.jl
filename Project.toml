@@ -1,5 +1,6 @@
 name = "Bitfinex"
 uuid = "47f46410-cced-11e8-1f13-43a2532b2fa8"
+license = "MIT"
 authors = "Alexandre Brilhante"
 version = "0.1.0"
 
