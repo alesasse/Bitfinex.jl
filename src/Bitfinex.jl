@@ -1,22 +1,19 @@
 module Bitfinex
 
-    using DataFrames, JSON, HTTP
+    using DataFrames, HTTP, JSON
 
-    export ticker,
-           trades,
-           fundingbook,
-           orderbook,
+    export tickers,
+           stats,
+           funding_book,
+           order_book,
            trades,
            lends,
            symbols,
-           symboldetails
+           symbols_details
 
-    include("authenticated.jl")
-    include("calculation.jl")
     include("public.jl")
+    include("utils.jl")
 
     const URL = "https://api.bitfinex.com/v1/"
-    const KEY = "<Your API key here>"
-    const SECRET = "<Your API secret here>"
 
 end

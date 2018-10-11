@@ -26,10 +26,10 @@ end
 """
 Full margin funding book.
 """
-function fundingbook(currency::String,
+function funding_book(currency::String,
                      limit_bids::Int64 = 50,
                      limit_asks::Int64 = 50)
-    r = HTTP.get("$URL/lendbook/$currency")
+    r = HTTP.get("$URL/lendbook/$currency?limit_bids=$limit_bids&limit_asks=$limit_asks")
     s = String(r.body)
     return JSON.Parser.parse(s)
 end
@@ -37,11 +37,11 @@ end
 """
 Full order book.
 """
-function orderbook(symbol::String,
+function order_book(symbol::String,
                    limit_bids::Int64 = 50,
                    limit_asks::Int64 = 50,
                    group::Bool = true)
-    r = HTTP.get("$URL/book/$symbol")
+    r = HTTP.get("$URL/book/$symbol?limit_bids=$limit_bids&limit_asks=$limit_asks")
     s = String(r.body)
     return JSON.Parser.parse(s)
 end
@@ -51,7 +51,7 @@ List of the most recent trades for the given symbol.
 """
 function trades(symbol::String,
                limit_trades = 50)
-    r = HTTP.get("$URL/trades/$symbol")
+    r = HTTP.get("$URL/trades/$symbol?limit_trades=$limit_trades")
     s = String(r.body)
     return JSON.Parser.parse(s)
 end
@@ -61,8 +61,8 @@ List of the most recent funding data for the given currency: total
 amount provided and Flash Return Rate (in % by 365 days) over time.
 """
 function lends(currency::String,
-               limit_trades = 50)
-    r = HTTP.get("$URL/lends/$currency")
+               limit_lends = 50)
+    r = HTTP.get("$URL/lends/$currency?limit_lends=$limit_lends")
     s = String(r.body)
     return JSON.Parser.parse(s)
 end
@@ -73,14 +73,14 @@ List of symbol names.
 function symbols()
     r = HTTP.get("$URL/symbols")
     s = String(r.body)
-    return DataFrame(Symbol = JSON.Parser.parse(s))
+    return JSON.Parser.parse(s)
 end
 
 """
 List of valid symbol IDs and the pair details.
 """
-function symboldetails()
+function symbol_details()
     r = HTTP.get("$URL/symbols_details")
     s = String(r.body)
-    return DataFrame(Symbol = JSON.Parser.parse(s))
+    return JSON.Parser.parse(s)
 end
