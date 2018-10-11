@@ -9,7 +9,8 @@ module Bitfinex
            trades,
            lends,
            symbols,
-           symbols_details
+           symbols_details,
+           json2df
 
     include("public.jl")
     include("utils.jl")
