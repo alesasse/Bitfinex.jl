@@ -2,13 +2,13 @@
 
 Julia wrapper for the Bitfinex REST API.
 
-# Installation
+## Installation
 
 ```julia
 (v1.0) pkg> add https://github.com/brilhana/Bitfinex.jl
 ```
 
-# Usage
+## Usage
 ```julia
 julia> using Bitfinex
 
@@ -22,11 +22,11 @@ julia> stats("btcusd")
 │ 3   │ 30     │ 492908.6446922  │
 ```
 
-# TODO
+## TODO
 
 * Public endpoints.
 * Tests.
 
-# Documentation
+## Documentation
 
 https://docs.bitfinex.com/v1/docs
