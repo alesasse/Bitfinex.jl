@@ -1,6 +1,6 @@
 module Bitfinex
 
-    using DataFrames, HTTP, JSON
+    using DataFrames, HTTP, JSON2
 
     export tickers,
            stats,

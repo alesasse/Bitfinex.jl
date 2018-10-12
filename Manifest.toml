@@ -87,6 +87,12 @@ git-tree-sha1 = "fec8e4d433072731466d37ed0061b3ba7f70eeb9"
 uuid = "682c06a0-de6a-54ab-a142-c8b1cf79cde6"
 version = "0.19.0"
 
+[[JSON2]]
+deps = ["Dates", "Parsers", "Pkg", "Test"]
+git-tree-sha1 = "f5015beff1cf6b4f937608a1598ff6179c781e3f"
+uuid = "2535ab7d-5cd8-5a07-80ac-9b1792aadce3"
+version = "0.2.2"
+
 [[LibGit2]]
 uuid = "76f85450-5226-5b5a-8eaa-529ad045b433"
 
@@ -124,6 +130,12 @@ deps = ["Pkg", "Random", "Serialization", "Test"]
 git-tree-sha1 = "85619a3f3e17bb4761fe1b1fd47f0e979f964d5b"
 uuid = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
 version = "1.0.2"
+
+[[Parsers]]
+deps = ["Dates", "Mmap", "Pkg", "Test"]
+git-tree-sha1 = "d5252e3f228a513b9947585e95b94d146b7d66e4"
+uuid = "69de0a69-1ddd-5017-9359-2bf0b02dc9f0"
+version = "0.2.7"
 
 [[Pkg]]
 deps = ["Dates", "LibGit2", "Markdown", "Printf", "REPL", "Random", "SHA", "UUIDs"]

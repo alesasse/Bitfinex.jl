@@ -23,8 +23,8 @@ end
 Full margin funding book.
 """
 function funding_book(currency::String,
-                     limit_bids::Int64 = 50,
-                     limit_asks::Int64 = 50)
+                      limit_bids::Int64 = 50,
+                      limit_asks::Int64 = 50)
     r = HTTP.get("$URL/lendbook/$currency?limit_bids=$limit_bids&limit_asks=$limit_asks")
     s = String(r.body)
     return json2df(s)
@@ -34,9 +34,9 @@ end
 Full order book.
 """
 function order_book(symbol::String,
-                   limit_bids::Int64 = 50,
-                   limit_asks::Int64 = 50,
-                   group::Bool = true)
+                    limit_bids::Int64 = 50,
+                    limit_asks::Int64 = 50,
+                    group::Bool = true)
     r = HTTP.get("$URL/book/$symbol?limit_bids=$limit_bids&limit_asks=$limit_asks")
     s = String(r.body)
     return json2df(s)
@@ -46,7 +46,7 @@ end
 List of the most recent trades for the given symbol.
 """
 function trades(symbol::String,
-               limit_trades = 50)
+                limit_trades = 50)
     r = HTTP.get("$URL/trades/$symbol?limit_trades=$limit_trades")
     s = String(r.body)
     return json2df(s)
