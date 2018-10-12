@@ -1,16 +1,19 @@
 module Bitfinex
 
-    using DataFrames, HTTP, JSON2
+    using DataFrames
+    
+    import HTTP: get
+    import JSON: parse
+    import JSON2: read
 
-    export tickers,
+    export ticker,
            stats,
            funding_book,
            order_book,
            trades,
            lends,
            symbols,
-           symbols_details,
-           json2df
+           symbol_details
 
     include("public.jl")
     include("utils.jl")
