@@ -18,6 +18,8 @@ module Bitfinex
     include("public.jl")
     include("utils.jl")
 
-    const URL = "https://api.bitfinex.com/v1/"
+    const URL = "https://api.bitfinex.com/v1"
+
+    SymStr = Union{Symbol, String}
 
 end

@@ -4,7 +4,7 @@ It shows you the current best bid and ask, as well as the last
 trade price. It also includes information such as daily volume
 and how much the price has moved over the last day.
 """
-function ticker(symbol::String)
+function ticker(symbol::SymStr)
     r = get("$URL/pubticker/$symbol")
     s = String(r.body)
     return json2df(s)
@@ -13,7 +13,7 @@ end
 """
 Various statistics about the requested pair.
 """
-function stats(symbol::String)
+function stats(symbol::SymStr)
     r = get("$URL/stats/$symbol")
     s = String(r.body)
     return json2df(s)
@@ -22,7 +22,7 @@ end
 """
 Full margin funding book.
 """
-function funding_book(currency::String,
+function funding_book(currency::SymStr,
                       limit_bids::Int64 = 50,
                       limit_asks::Int64 = 50)
     r = get("$URL/lendbook/$currency?limit_bids=$limit_bids&limit_asks=$limit_asks")
@@ -33,7 +33,7 @@ end
 """
 Full order book.
 """
-function order_book(symbol::String,
+function order_book(symbol::SymStr,
                     limit_bids::Int64 = 50,
                     limit_asks::Int64 = 50,
                     group::Bool = true)
@@ -45,8 +45,8 @@ end
 """
 List of the most recent trades for the given symbol.
 """
-function trades(symbol::String,
-                limit_trades = 50)
+function trades(symbol::SymStr,
+                limit_trades::Int64 = 50)
     r = get("$URL/trades/$symbol?limit_trades=$limit_trades")
     s = String(r.body)
     return json2df(s)
@@ -56,8 +56,8 @@ end
 List of the most recent funding data for the given currency: total
 amount provided and Flash Return Rate (in % by 365 days) over time.
 """
-function lends(currency::String,
-               limit_lends = 50)
+function lends(currency::SymStr,
+               limit_lends::Int64 = 50)
     r = get("$URL/lends/$currency?limit_lends=$limit_lends")
     s = String(r.body)
     return json2df(s)
