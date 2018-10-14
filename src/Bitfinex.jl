@@ -6,20 +6,18 @@ module Bitfinex
     import JSON: parse
     import JSON2: read
 
-    export ticker,
-           stats,
-           funding_book,
-           order_book,
-           trades,
-           lends,
-           symbols,
-           symbol_details
+    export getticker,
+           getstats,
+           getfundingbook,
+           getorderbook,
+           gettrades,
+           getlends,
+           getsymbols,
+           getsymboldetails
 
     include("public.jl")
     include("utils.jl")
 
     const URL = "https://api.bitfinex.com/v1"
-
-    SymStr = Union{Symbol, String}
 
 end
