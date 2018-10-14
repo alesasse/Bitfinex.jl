@@ -12,20 +12,21 @@ Julia wrapper for the Bitfinex REST API.
 ```julia
 julia> using Bitfinex
 
-julia> stats("btcusd")
-3×2 DataFrames.DataFrame
-│ Row │ period │ volume          │
-│     │ Any    │ Any             │
-├─────┼────────┼─────────────────┤
-│ 1   │ 1      │ 41195.66415107  │
-│ 2   │ 7      │ 101364.04300661 │
-│ 3   │ 30     │ 492908.6446922  │
+julia> names(Bitfinex)
+9-element Array{Symbol,1}:
+ :Bitfinex        
+ :getfundingbook  
+ :getlends        
+ :getorderbook    
+ :getstats        
+ :getsymboldetails
+ :getsymbols      
+ :getticker       
+ :gettrades 
+
+julia> getticker("btcusd")
+(mid = "6360.05", bid = "6360.0", ask = "6360.1", last_price = "6360.1", low = "6299.0", high = "6399.3", volume = "8052.54028462", timestamp = "1539525945.2944384")
 ```
-
-## TODO
-
-* Public endpoints.
-* Tests.
 
 ## Documentation
 
