@@ -52,6 +52,23 @@ function gettrades(symbol::String,
     return read(s)
 end
 
+function gettrades(symbol::String,
+                   timestamp::String,
+                   limit_trades::Int64 = 50)
+    r = get("$URL/trades/$symbol?limit_trades=$limit_trades&timestamp=$timestamp")
+    s = String(r.body)
+    return read(s)
+end
+
+function gettrades(symbol::String,
+                   timestamp::DateTime,
+                   limit_trades::Int64 = 50)
+    str_timestamp = string(value(timestamp))
+    r = get("$URL/trades/$symbol?limit_trades=$limit_trades&timestamp=$str_timestamp")
+    s = String(r.body)
+    return read(s)
+end
+
 """
 List of the most recent funding data for the given currency: total
 amount provided and Flash Return Rate (in % by 365 days) over time.
