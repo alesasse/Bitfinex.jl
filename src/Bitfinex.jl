@@ -1,10 +1,11 @@
 module Bitfinex
 
     using DataFrames
-    
+
     import HTTP: get
     import JSON: parse
     import JSON2: read
+    import Dates: DateTime, value
 
     export getticker,
            getstats,
